@@ -1,0 +1,3 @@
+[language-server.gopls.config]
+staticcheck = true
+linksInHover = false

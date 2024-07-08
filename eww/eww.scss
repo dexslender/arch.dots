@@ -1,0 +1,157 @@
+* {
+  all: unset;
+  /* font-family: "Hack Nerd Font"; */
+}
+
+.bar {
+  background-color: rgba(0, 0, 0, 0);
+  color: #1793d1;
+  border-radius: 7px;
+  margin-top: 4px;
+}
+
+tooltip {
+  font-family: "Ubuntu Nerd Font";
+  border-radius: 4px;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.info {
+  font-family: "Hack Nerd Font";
+
+  .logo {
+    font-size: 20px;
+    background-color: #3c3a47;
+    padding: 0px 12px 0px 6px;
+    border-radius: 4px;
+    transition: all ease .2s;
+
+    &:hover {
+      background-color: #1793d1;
+      color: #ffffff;
+    }
+
+    &:active {
+      background-color: #1793d1;
+      color: #ffffff;
+    }
+  }
+
+  .clock {
+    font-size: 17px;
+  }
+
+  .music {
+    &.playing {
+      padding: 0px 7px 0px 7px;
+      background-color: #131416;
+      border-radius: 7px;
+    }
+
+    .track {
+      font-size: 12px;
+    }
+
+    .player {
+      font-size: 20px;
+      padding: 0px 7px 0px 0px;
+
+      &:hover {
+        color: #7d00ff;
+      }
+
+      &:active {
+        color: #7d00ff;
+      }
+    }
+  }
+}
+
+.workspaces {
+  font-family: "Hack Nerd Font";
+  background-color: #131416;
+  border-radius: 7px;
+  padding: 0px 10px 0px 6px;
+
+  // margin: 0px 3px 3px;
+  .workspace-slot {
+    padding: 0px 5px 0px 3px;
+
+    &:hover {
+      color: #7d00ff;
+    }
+
+    &:active {
+      color: #7d00ff;
+    }
+  }
+}
+
+.tools {
+  font-family: "Hack Nerd Font";
+  background-color: #131416;
+  border-radius: 7px;
+  /* font-size: smaller; */
+  padding: 0px 5px;
+
+  .battery {
+    &.progress {
+      color: #7d00ff;
+
+      &.full {
+        color: #00ff00;
+      }
+
+      &.low {
+        color: red;
+      }
+    }
+
+    &.percent {
+      font-size: 11px;
+      color: #1793d1;
+      font-weight: bolder;
+      padding: 5px;
+    }
+  }
+
+  .tool-button {
+    font-size: 18px;
+    padding: 0px 9px 0px 4px;
+    border-radius: 4px;
+    margin: 1px 0px;
+
+    &:hover {
+      color: #7d00ff;
+      background-color: #2b2a33;
+    }
+
+    &:active {
+      color: #7d00ff;
+      background-color: #2b2a33;
+    }
+  }
+}
+
+.systray {
+  all: unset;
+  font-family: "Ubuntu Nerd Font";
+}
+
+.systray menu {
+  background-color: rgba(60, 58, 71, 0.443);
+  border-radius: 7px;
+  padding: 5px;
+}
+
+.systray menuitem {
+  font-size: 15px;
+
+  &:hover {
+    color: #7d00ff;
+  }
+
+  &:active {
+    color: #7d00ff;
+  }
+}

@@ -1,0 +1,82 @@
+{
+  "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
+  "modules": [
+    // "break",
+    "title",
+    "separator",
+    {
+      "type": "os",
+      "key": "OS "
+    },
+    {
+      "type": "host",
+      "key": "  "
+    },
+    {
+      "type": "kernel",
+      "key": "  "
+    },
+    {
+      "type": "uptime",
+      "key": "󰄉  "
+    },
+    {
+      "type": "packages",
+      "key": "  "
+    },
+    {
+      "type": "shell",
+      "key": "  "
+    },
+    // "display",
+    "de",
+    {
+      "type": "wm",
+      "key": "WM "
+    },
+    // "wmtheme",
+    // "theme",
+    // "icons",
+    // "font",
+    // "cursor",
+    {
+      "type": "terminal",
+      "key": "  "
+    },
+    // "terminalfont",
+    "cpu",
+    "gpu",
+    {
+      "type": "memory",
+      "key": "󰾆  "
+    },
+    {
+      "type": "swap",
+      "key": "󰯍  "
+    },
+    {
+      "type": "disk",
+      "key": "  "
+    },
+    "localip",
+    "battery",
+    "poweradapter",
+    "locale",
+    {
+      "type": "colors",
+      "symbol": "diamond"
+    }
+  ],
+  "logo": {
+    "type": "kitty",
+    "source": "./archicon.png",
+    "height": 10,
+    "padding": {
+      "top": 1,
+      "left": 1
+    }
+  },
+  "display": {
+    "separator": "|> "
+  }
+}

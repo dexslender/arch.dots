@@ -1,0 +1,118 @@
+(deflisten music "playerctl metadata -F -f '{{ artist }} - {{ title }}' || true")
+(defpoll time :interval "10s" "date '+%I:%M %p'")
+(deflisten workspace "scripts/hyprland-workspaces eDP-1")
+(deflisten blueww "scripts/blueww || true")
+
+(defvar exec "hyprctl dispatch exec")
+(defvar menu_launcher "tofi-drun --prompt-text ' ' | xargs hyprctl dispatch exec --")
+
+(defwidget bar []
+  (centerbox :orientation "h" (info) (workspaces) (right))
+)
+
+(defwidget right []
+  (box :class "right"
+    :orientation "h"
+    :space-evenly false
+    :spacing 10
+    :halign "end"
+    (systray  :class "systray"
+              :spacing 10
+              :orientation "h"
+              :icon-size 18
+    )
+    (box :class "tools" :space-evenly false :spacing 10 :orientation "h"
+      ; (button :class "tool-button"
+      ;   "󰤨"
+      ; )
+      (button
+        :class "tool-button ${blueww.Connected != "null" ? "active" : ""}"
+        :tooltip "${blueww.Connected != "null" 
+                  ? "${blueww.Connected.Alias}: ${blueww.Connected.Address}
+    click to disconnect" 
+                  : "${blueww.Alias}: ${blueww.Powered?"on":"off"}"}"
+        :onclick "${blueww.Connected != "null" ? "${exec} bluetoothctl disconnect" : ""}"
+        :onrightclick "${exec} bluetoothctl power ${blueww.Powered ? "off" : "on" }"
+        {blueww.Powered ? blueww.Connected != "null" ? "󰂱 ${blueww.Connected.Alias}" : blueww.Pairable ? "󰂰" : "󰂯" : "󰂲"}
+      )
+      (box :class "battery" :vexpand "false" :hexpand "false" 
+          (circular-progress
+            :class "battery progress ${EWW_BATTERY['BAT0'].capacity >= 95 ? "full" : ""} ${EWW_BATTERY['BAT0'].capacity <= 25 ? "low" : ""}"
+            :value {EWW_BATTERY['BAT0'].capacity}
+            :thickness 3
+            :start-at 75
+            :clockwise false
+            (label 
+              :class "battery percent"
+              :text {EWW_BATTERY['BAT0'].capacity}
+              :wrap false
+            )
+          )
+        )
+      (button 
+        :class "tool-button"
+        :tooltip "Power"
+        :onclick "${exec} 'sh .config/eww/scripts/power.sh'" ""
+      )
+    )
+  )
+)
+
+(defwidget workspaces []
+    (box :class "workspaces" :space-evenly false :spacing 7
+      (for i in workspace
+        (button
+          :onclick "${matches(i.name, "special") ? "hyprctl dispatch togglespecialworkspace ${substring(i.name, 8, strlength(i.name))}" : "hyprctl dispatch workspace ${i.id}"}"
+          :class "workspace-slot"
+          "${matches(i.name, "special") ? "󰓏" : i.active ? "" : ""}"
+        )
+      )
+))
+
+(defwidget info [] (box :class "info"
+                        :orientation "h" 
+                        :halign "start" 
+                        :space-evenly false 
+                        :spacing 15
+  (button :class "logo" :halign "start" :onclick "${exec} \"${menu_launcher}\"" "")
+  (label :class "clock" :halign "end" :text time)
+  (box :class "music ${music != "" ? "playing" : ""}"
+       :space-evenly false
+       :spacing 7
+    (button :class "player"
+            :onclick {music != "" ? "playerctl previous" : true}
+            "${music != "" ? "󰒮" : ""}")
+    (button :class "player"
+            :onclick {music != "" ? "playerctl play-pause" : true}
+            "${music != "" ? "󰐎" : ""}")
+    (button :class "player"
+            :onclick {music != "" ? "playerctl next" : true}
+            "${music != "" ? "󰒭" : ""}")
+    (label  :class "track"
+            :limit-width 41
+            :text music)
+  )
+))
+
+(defwindow bar
+  :monitor 0
+  :exclusive true
+  :geometry (geometry 
+    :x "0%"
+    :y "0%"
+    :width "99.5%"
+    :height "10px"
+    :anchor "top center"
+  )
+  (bar)
+)
+
+; (defvar works "[1, 2, 3, 4, 5]")
+; (defwidget workspaces [] (box :class "workspaces" :orientation "h" :spacing 7 :space-evenly false
+;   (for work in works
+;     (button :class "workspace"
+;             :onclick "hyprctl dispatch workspace ${work}"
+;             {work == current_workspace ? "" : ""}) 
+;   )
+; ))
+
