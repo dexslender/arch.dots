@@ -1,0 +1,3 @@
+[submodule "eww/scripts/.hyprland-workspaces"]
+	path = eww/scripts/.hyprland-workspaces
+	url = https://github.com/FieldofClay/hyprland-workspaces.git
